@@ -15,6 +15,8 @@ class comment extends Model
 
     protected $fillable = [
         'posting',
+        'nama',
+        'email',
         'komentar',
         'created_at_date',
         'created_at_time',

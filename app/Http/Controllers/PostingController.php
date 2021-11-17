@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\comment;
 use App\Models\posting;
 use DateTime;
 use DateTimeZone;
@@ -10,13 +11,19 @@ use Illuminate\Support\Facades\DB;
 
 class PostingController extends Controller
 {
+    public function home(){
+        $data = DB::table('postings')->get();
+        return view('index', compact('data'));
+    }
+
     public function index(){
-        $data = DB::table('postings');
-        return view('home', compact('data'));
+        $data = DB::table('postings')->get();
+        return view('posting.index', compact('data'));
     }
 
     public function create(){
-        return view('posting.create');
+        $data = null;
+        return view('posting.create', compact('data'));
     }
     
     public function store(Request $request){
@@ -27,11 +34,17 @@ class PostingController extends Controller
             'judul'=>$request->judul,
             'deskripsi'=>$request->deskripsi,
             'gambar'=>$request->gambar,
-            'created_at_date'=>$date->format('d-m-Y'),
-            'created_at_time'=>$date->format('H:i:s'),
+            'created_at_date'=>$date->format('Y-m-d'),
+            'created_at_time'=>$date->format('H:i'),
         ]);
 
         return redirect()->route('posting.index')->with('success', 'Posting berhasil ditambahkan');
+    }
+
+    public function showPost($id){
+        $data = posting::find($id);
+        $comment = DB::table('comments')->where('posting', $id)->get();
+        return view('show', compact('data', 'comment'));
     }
 
     public function show($id){
@@ -40,25 +53,25 @@ class PostingController extends Controller
     }
 
     public function edit($id){
-        $data = DB::table('posting')->where('id', $id)->first();
-        return view('posting.edit', compact('data'));
+        $data = DB::table('postings')->where('id', $id)->first();
+        return view('posting.create', compact('data'));
     }
     
     public function update(Request $request){
         $date = new DateTime();
         $date->setTimezone(new DateTimeZone('Asia/Jakarta'));
 
-        DB::table('posting')->where('id', $request->id)->update([
+        DB::table('postings')->where('id', $request->id)->update([
             'judul'=>$request->judul,
             'deskripsi'=>$request->deskripsi,
             'gambar'=>$request->gambar,
-            'updated_at_date'=>$date->format('d-m-Y'),
-            'updated_at_time'=>$date->format('H:i:s'),
+            'updated_at_date'=>$date->format('Y-m-d'),
+            'updated_at_time'=>$date->format('H:i')
         ]);
-        return view('posting.edit', compact('data'));
+        return redirect()->route('posting.index')->with('success', 'Posting berhasil diupdate');
     }
     
-    public function delete($id){
+    public function destroy($id){
         DB::table('postings')->where('id', $id)->delete();
         return redirect()->route('posting.index')->with('success', 'Posting berhasil dihapus');
     }

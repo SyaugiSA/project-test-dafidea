@@ -11,19 +11,19 @@ use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
-    public function index($id){
-        $data = DB::table('comments')->where('posting', $id);
-    }
-
-    public function store($id, Request $request){
+    public function store(Request $request){
         $date = new DateTime();
         $date->setTimezone(new DateTimeZone('Asia/Jakarta'));
 
-        $data = DB::table('comments')->insert([
-            'posting'=>$id,
+        DB::table('comments')->insert([
+            'posting'=>$request->id,
+            'nama'=>$request->nama,
+            'email'=>$request->email,
             'komentar'=>$request->komentar,
-            'created_at_date'=>$date->format('d-m-Y'),
-            'created_at_time'=>$date->format('H:i:s'),
+            'created_at_date'=>$date->format('Y-m-d'),
+            'created_at_time'=>$date->format('H:i'),
         ]);
+
+        return redirect('post/'.$request->id)->with('success', 'Komentar berhasil ditambahkan');
     }
 }

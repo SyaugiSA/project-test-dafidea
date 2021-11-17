@@ -14,8 +14,10 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id('id');
             $table->string('posting');
+            $table->string('nama', 50);
+            $table->string('email', 50);
             $table->string('komentar', 100);
             $table->date('created_at_date')->nullable();
             $table->time('created_at_time')->nullable();

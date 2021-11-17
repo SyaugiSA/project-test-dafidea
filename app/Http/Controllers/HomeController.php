@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\comment;
+use App\Models\posting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $komen = DB::table('comments')->get();
+        $jmlkomen = DB::table('comments')->count();
+        $jmlpost = DB::table('postings')->count();
+        return view('home', compact('komen', 'jmlkomen', 'jmlpost'));
     }
 }

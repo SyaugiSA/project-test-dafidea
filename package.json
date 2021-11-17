@@ -8,11 +8,10 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "laravel-dev": "php artisan serve --no-reload --host=192.168.1.4 --port=8000"
+        "laravel-dev": "php artisan serve --no-reload --host=192.168.1.5 --port=8000"
     },
     "devDependencies": {
         "axios": "^0.21",
-        "bootstrap": "^4.6.0",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
@@ -21,5 +20,9 @@
         "resolve-url-loader": "4.0.0",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.10.2",
+        "bootstrap": "^5.1.3"
     }
 }
