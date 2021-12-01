@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $komen = DB::table('comments')->get();
+        $komen = comment::get();
         $jmlkomen = DB::table('comments')->count();
         $jmlpost = DB::table('postings')->count();
         return view('home', compact('komen', 'jmlkomen', 'jmlpost'));

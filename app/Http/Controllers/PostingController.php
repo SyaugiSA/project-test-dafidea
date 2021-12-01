@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\comment;
 use App\Models\posting;
+use App\Models\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PostingController extends Controller
 {
     public function home(){
-        $data = DB::table('postings')->get();
+        $data = posting::get();
         return view('index', compact('data'));
     }
 
@@ -34,6 +36,7 @@ class PostingController extends Controller
             'judul'=>$request->judul,
             'deskripsi'=>$request->deskripsi,
             'gambar'=>$request->gambar,
+            'user_id'=>Auth::id(),
             'created_at_date'=>$date->format('Y-m-d'),
             'created_at_time'=>$date->format('H:i'),
         ]);
@@ -42,18 +45,17 @@ class PostingController extends Controller
     }
 
     public function showPost($id){
-        $data = posting::find($id);
-        $comment = DB::table('comments')->where('posting', $id)->get();
-        return view('show', compact('data', 'comment'));
+        $data = posting::find($id)->first();
+        return view('show', compact('data'));
     }
 
     public function show($id){
-        $data = DB::table('postings')->where('id', $id)->get();
+        $data = posting::find($id)->first();
         return view('posting.show', compact('data'));
     }
 
     public function edit($id){
-        $data = DB::table('postings')->where('id', $id)->first();
+        $data = posting::find($id)->first();
         return view('posting.create', compact('data'));
     }
     
@@ -72,7 +74,7 @@ class PostingController extends Controller
     }
     
     public function destroy($id){
-        DB::table('postings')->where('id', $id)->delete();
+        posting::find($id)->delete();
         return redirect()->route('posting.index')->with('success', 'Posting berhasil dihapus');
     }
 }

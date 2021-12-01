@@ -18,6 +18,7 @@ class CreatePostingsTable extends Migration
             $table->string('judul', 100);
             $table->string('deskripsi', 500);
             $table->string('gambar');
+            $table->foreignId('user_id');
             $table->date('created_at_date')->nullable();
             $table->time('created_at_time')->nullable();
             $table->date('updated_at_date')->nullable();

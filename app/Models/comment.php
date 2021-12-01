@@ -14,11 +14,15 @@ class comment extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'posting',
+        'posting_id',
         'nama',
         'email',
         'komentar',
         'created_at_date',
         'created_at_time',
     ];
+
+    public function posting(){
+        return $this->belongsTo(posting::class);
+    }
 }

@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "laravel-dev": "php artisan serve --no-reload --host=192.168.1.5 --port=8000"
+        "laravel-dev": "php artisan serve --no-reload --host=192.168.1.3 --port=8000"
     },
     "devDependencies": {
         "axios": "^0.21",

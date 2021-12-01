@@ -37,7 +37,7 @@
                                     <th>Email</th>
                                     <th>Judul</th>
                                     <th>Komentar</th>
-                                    <th>Tanggal</th>
+                                    <th>Tanggal dibuat</th>
                                     <th>Jam</th>
                                 </tr>
                             </thead>
@@ -46,19 +46,10 @@
                                 <tr>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>
-                                        <?php
-                                    $posting = DB::table('postings')->where('id', $item->posting)->get('judul');
-                                    foreach ($posting as $value) {
-                                        echo $value->judul;
-                                    }
-                                    ?>
-                                    </td>
+                                    <td>{{ $item->posting->judul }}</td>
                                     <td>{{ $item->komentar }}</td>
                                     <td>{{ $item->created_at_date }}</td>
                                     <td>{{ $item->created_at_time }}</td>
-                                    <td>{{ $item->updated_at_date }}</td>
-                                    <td>{{ $item->updated_at_time }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

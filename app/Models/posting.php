@@ -17,9 +17,18 @@ class posting extends Model
         'judul',
         'deskripsi',
         'gambar',
+        'user_di',
         'created_at_date',
         'created_at_time',
         'updated_at_date',
         'updated_at_time'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function comment(){
+        return $this->hasMany(comment::class);
+    }
 }

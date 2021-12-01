@@ -10,7 +10,7 @@
                         <!-- Post title-->
                         <h1 class="fw-bolder mb-1">{{ $data->judul }}</h1>
                         <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">Posted on {{ $data->created_at_date }}:{{ $data->created_at_time }}</div>
+                        <div class="text-muted fst-italic mb-2">by {{$data->user->name}} on {{ $data->created_at_date }}:{{ $data->created_at_time }}</div>
                     </header>
                     <!-- Preview image figure-->
                     <figure class="mb-4"><img class="img-fluid rounded" src="{{ $data->gambar }}" alt="..." /></figure>
@@ -45,7 +45,7 @@
                                 </div>
                             </form>
                             <!-- Comment with nested comments-->
-                            @foreach ($comment as $item)
+                            @foreach ($data->comment as $item)
                             <div class="d-flex mb-4">
                                 <!-- Parent comment-->
                                 <div class="ms-3">

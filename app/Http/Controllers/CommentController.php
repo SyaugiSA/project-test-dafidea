@@ -16,7 +16,7 @@ class CommentController extends Controller
         $date->setTimezone(new DateTimeZone('Asia/Jakarta'));
 
         DB::table('comments')->insert([
-            'posting'=>$request->id,
+            'posting_id'=>$request->id,
             'nama'=>$request->nama,
             'email'=>$request->email,
             'komentar'=>$request->komentar,
