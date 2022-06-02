@@ -1,4 +1,4 @@
-FROM php:8.0.2-apache
+FROM php:8.1.5-apache
 USER root
 WORKDIR /var/www/html
 RUN apt-get update && apt-get install -y \
