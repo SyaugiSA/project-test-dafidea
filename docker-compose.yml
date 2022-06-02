@@ -17,6 +17,6 @@ services:
             dockerfile: .docker/Dockerfile
         image: "project-test-dafidea"
         ports:
-            - 8080:80
+            - 8080:808
         volumes:
             - ./:/var/www/html
