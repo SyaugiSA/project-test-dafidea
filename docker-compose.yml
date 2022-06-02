@@ -4,7 +4,7 @@ services:
         image: mysql:5.7
         restart: always
         ports:
-            - "3306:33"
+            - "33:33"
         environment:
             MYSQL_DATABASE: "project-test-dafidea"
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
@@ -17,6 +17,6 @@ services:
             dockerfile: .docker/Dockerfile
         image: "project-test-dafidea"
         ports:
-            - 8080:808
+            - 808:808
         volumes:
             - ./:/var/www/html
